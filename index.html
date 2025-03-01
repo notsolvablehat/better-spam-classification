@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Shield - Smart Spam Detection</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4338ca 0%, #312e81 100%);
+        }
+        .card-hover {
+            transition: transform 0.2s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <nav class="glass-effect fixed w-full z-10 border-b border-slate-200">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-indigo-900">SpamGuard</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Home</a>
+                    <a href="about.html" class="text-slate-600 hover:text-indigo-600 font-medium transition-colors">About</a>
+                    <a href="contact.html" class="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <section class="py-20 gradient-bg">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                        Smart Email Protection
+                    </h1>
+                    <p class="text-xl text-indigo-100 mb-8">
+                        Shield your inbox with AI-powered spam detection
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 -mt-10">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+                    <form id="classifier-form" class="space-y-6">
+                        <div class="relative">
+                            <label for="email-content" class="block text-sm font-medium text-slate-700 mb-2">
+                                Email Content
+                            </label>
+                            <textarea
+                                id="email-content"
+                                class="w-full h-40 px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                                placeholder="Paste your email content here to analyze..."
+                                required
+                            ></textarea>
+                        </div>
+                        <div class="flex justify-center">
+                            <button
+                                type="submit"
+                                class="px-8 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            >
+                                Analyze Email
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="result" class="mt-8 hidden animate-slide-in">
+                        <div class="border-t border-slate-200 pt-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-semibold text-slate-900">Analysis Results</h3>
+                                <div id="result-badge" class="px-4 py-1 rounded-full text-sm font-medium"></div>
+                            </div>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm font-medium text-slate-600">Confidence Score</span>
+                                        <span id="confidence-text" class="text-sm font-medium text-slate-900"></span>
+                                    </div>
+                                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                                        <div id="confidence-bar" class="h-full transition-all duration-500 ease-out"></div>
+                                    </div>
+                                </div>
+                                
+                                <div id="analysis-details" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">Key Features</h2>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="p-6 bg-white rounded-xl shadow-sm card-hover">
+                            <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Real-time Analysis</h3>
+                            <p class="text-slate-600">Get instant results with our advanced machine learning algorithms.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-sm card-hover">
+                            <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Advanced Protection</h3>
+                            <p class="text-slate-600">Multi-layer analysis to catch sophisticated spam attempts.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-sm card-hover">
+                            <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Detailed Analytics</h3>
+                            <p class="text-slate-600">Get comprehensive insights into classification decisions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    document.getElementById('classifier-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const emailContent = document.getElementById('email-content').value;
+        const resultDiv = document.getElementById('result');
+        const resultBadge = document.getElementById('result-badge');
+        const confidenceText = document.getElementById('confidence-text');
+        const confidenceBar = document.getElementById('confidence-bar');
+        const analysisDetails = document.getElementById('analysis-details');
+        
+        try {
+            // Show loading state
+            resultDiv.classList.remove('hidden');
+            resultBadge.textContent = 'Analyzing...';
+            
+            const response = await fetch('http://localhost:5000/api/classify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ emailContent }),
+            });
+            
+            const data = await response.json();
+            
+            // Ensure data has all required properties
+            if (!data || !Array.isArray(data.reasons)) {
+                throw new Error('Invalid response from server');
+            }
+            
+            // Update UI with results
+            resultBadge.textContent = data.isSpam ? 'Spam Detected' : 'Not Spam';
+            resultBadge.className = `px-4 py-1 rounded-full text-sm font-medium ${
+                data.isSpam ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+            }`;
+            
+            // Update confidence score
+            const confidencePercent = Math.round((data.confidence || 0));
+            confidenceText.textContent = `${confidencePercent}%`;
+            confidenceBar.style.width = `${confidencePercent}%`;
+            confidenceBar.className = `h-full transition-all duration-500 ease-out ${
+                data.isSpam ? 'bg-red-500' : 'bg-green-500'
+            }`;
+            
+            // Display reasons
+            analysisDetails.innerHTML = `
+                <div class="col-span-2">
+                    <h4 class="text-sm font-medium text-slate-900 mb-2">Analysis Details</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600">
+                        ${data.reasons.map(reason => `<li>${reason}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm font-medium text-slate-600">Risk Level:</span>
+                        <span class="px-2 py-1 rounded text-xs font-medium ${
+                            data.riskLevel === 'high' ? 'bg-red-100 text-red-800' :
+                            data.riskLevel === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-green-100 text-green-800'
+                        }">${(data.riskLevel || 'low').toUpperCase()}</span>
+                    </div>
+                </div>
+            `;
+            
+        } catch (error) {
+            console.error('Error:', error);
+            resultBadge.textContent = 'Error';
+            resultBadge.className = 'px-4 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800';
+            analysisDetails.innerHTML = `
+                <div class="col-span-2">
+                    <p class="text-sm text-red-600">An error occurred while analyzing the email. Please try again.</p>
+                </div>
+            `;
+        }
+    });
+    </script>
+</body>
+</html>

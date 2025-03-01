@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpamGuard - About</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f7f9fc;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        nav {
+            background: #1a237e;
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+        }
+
+        nav a:hover {
+            color: #90caf9;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: #1a237e;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            color: #1a237e;
+            margin-bottom: 1rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            background: #e3f2fd;
+            color: #1a237e;
+            padding: 1rem;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            color: #1a237e;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">SpamGuard</div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h1>About SpamGuard</h1>
+            <p>SpamGuard is a state-of-the-art email spam classification system that uses advanced machine learning
+                algorithms to protect your inbox from unwanted messages. Our system continuously learns and adapts to
+                new spam patterns, ensuring the highest level of protection.</p>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">99.9%</div>
+                    <p>Accuracy Rate</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1M+</div>
+                    <p>Protected Inboxes</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <p>Active Protection</p>
+                </div>
+            </div>
+
+            <h2>Key Features</h2>
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <div>
+                    <h3>Machine Learning Powered</h3>
+                    <p>Our advanced AI algorithms continuously learn from new spam patterns to provide cutting-edge
+                        protection.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div>
+                    <h3>Real-time Analysis</h3>
+                    <p>Instant scanning and classification of incoming emails to stop spam before it reaches your inbox.
+                    </p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <div>
+                    <h3>Multi-layer Protection</h3>
+                    <p>Combined approach using content analysis, sender reputation, and behavior patterns.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
